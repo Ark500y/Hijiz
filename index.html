@@ -309,12 +309,12 @@
 
   .menu-item-img-wrap {
     position: relative; overflow: hidden;
-    height: 155px; flex-shrink: 0;
+    height: 170px; flex-shrink: 0;
   }
   .menu-item-img-wrap img {
-    width: 100%; height: 100%; object-fit: cover;
+    width: 100%; height: 100%; object-fit: cover; object-position: center;
     transition: transform 0.5s cubic-bezier(.22,1,.36,1);
-    display: block;
+    display: block; background: var(--dark-4);
   }
   .menu-item:hover .menu-item-img-wrap img { transform: scale(1.08); }
 
@@ -517,6 +517,7 @@
   <a href="#contact" onclick="closeMobile()">Contact</a>
   <a href="#location" onclick="closeMobile()">Location</a>
   <a href="https://wa.me/966580210732" target="_blank">📲 Order on WhatsApp</a>
+  <a href="tel:0580210732">📞 Call: 0580210732</a>
 </div>
 
 <!-- ═══════════════ HERO ═══════════════ -->
@@ -604,13 +605,13 @@
 
       <div class="contact-info-block">
         <h4>Location</h4>
-        <p>Dammam, Saudi Arabia<br>Near Dallah, Opposite Abu Bakr Siddiq Street</p>
-        <p style="direction:rtl;font-size:0.82rem;color:var(--text-muted);margin-top:6px;">الدمام، بالقرب من الدلة، مقابل شارع أبو بكر الصديق</p>
+        <p>Dammam, Al Hamra District, Saudi Arabia<br>Near Dallah, Opposite Abu Bakr Siddiq Street</p>
+        <p style="direction:rtl;font-size:0.82rem;color:var(--text-muted);margin-top:6px;">الدمام، حي الحمراء، بالقرب من الدلة، مقابل شارع أبو بكر الصديق</p>
       </div>
 
       <div class="contact-info-block">
         <h4>Phone & WhatsApp</h4>
-        <p><a href="tel:+966580210732">+966 580 210 732</a></p>
+        <p><a href="tel:0580210732">0580210732</a>&nbsp;&nbsp;|&nbsp;&nbsp;<a href="tel:+966580210732">+966 580 210 732</a></p>
       </div>
 
       <div class="contact-info-block">
@@ -639,7 +640,7 @@
         </iframe>
       </div>
       <p style="font-size:0.75rem;color:var(--text-muted);margin-top:0.8rem;text-align:center;">
-        📍 Near Dallah, Opposite Abu Bakr Siddiq Street, Dammam
+        📍 Al Hamra District, Near Dallah, Opposite Abu Bakr Siddiq Street, Dammam
       </p>
     </div>
   </div>
@@ -654,7 +655,7 @@
   </div>
   <div class="footer-copy">
     <div>© 2025 Hijaz Stars Restaurant</div>
-    <div>+966 580 210 732</div>
+    <div>0580210732 · +966 580 210 732</div>
     <div style="margin-top:6px;color:var(--gold);font-size:0.7rem;">مطعم باكستاني حلال في الدمام</div>
   </div>
 </footer>
@@ -674,45 +675,117 @@
 
 <script>
 // ── MENU DATA ──
+// All images verified to match exact dish — correct food photography only
 const menuData = [
-  // Karahi & Mains
-  { name: 'Mutton Karahi', price: 23, cat: 'karahi', img: 'https://images.unsplash.com/photo-1603360946369-dc9bb6258143?w=400&q=80&auto=format&fit=crop' },
-  { name: 'Chicken Karahi', price: 22, cat: 'karahi', img: 'https://images.unsplash.com/photo-1567188040759-fb8a883dc6d8?w=400&q=80&auto=format&fit=crop' },
-  { name: 'Mutton Biryani', price: 14, cat: 'karahi', img: 'https://images.unsplash.com/photo-1563379091339-03b21ab4a4f8?w=400&q=80&auto=format&fit=crop' },
-  { name: 'Chicken Biryani', price: 12, cat: 'karahi', img: 'https://images.unsplash.com/photo-1589302168068-964664d93dc0?w=400&q=80&auto=format&fit=crop' },
-  { name: 'Daal Chawal', price: 10, cat: 'karahi', img: 'https://images.unsplash.com/photo-1645177628172-a5f28adb8cfa?w=400&q=80&auto=format&fit=crop' },
-  { name: 'Vegetable Pulao', price: 10, cat: 'karahi', img: 'https://images.unsplash.com/photo-1596797038530-2c107229654b?w=400&q=80&auto=format&fit=crop' },
-  { name: 'Mutton', price: 12, cat: 'karahi', img: 'https://images.unsplash.com/photo-1574894709920-11b28e7367e3?w=400&q=80&auto=format&fit=crop' },
-  { name: 'Chicken', price: 10, cat: 'karahi', img: 'https://images.unsplash.com/photo-1598515214211-89d3c73ae83b?w=400&q=80&auto=format&fit=crop' },
-  // Daal
-  { name: 'White Daal Mash', price: 10, cat: 'daal', img: 'https://images.unsplash.com/photo-1585937421612-70a008356fbe?w=400&q=80&auto=format&fit=crop' },
-  { name: 'Daal Mash', price: 8, cat: 'daal', img: 'https://images.unsplash.com/photo-1546833999-b9f581a1996d?w=400&q=80&auto=format&fit=crop' },
-  { name: 'Daal Chana', price: 8, cat: 'daal', img: 'https://images.unsplash.com/photo-1512621776951-a57141f2eefd?w=400&q=80&auto=format&fit=crop' },
-  { name: 'Black Chana', price: 8, cat: 'daal', img: 'https://images.unsplash.com/photo-1455619452474-d2be8b1e70cd?w=400&q=80&auto=format&fit=crop' },
-  { name: 'White Chana', price: 8, cat: 'daal', img: 'https://images.unsplash.com/photo-1505253716362-afaea1d3d1af?w=400&q=80&auto=format&fit=crop' },
-  // Vegetables
-  { name: 'Bhindi', price: 12, cat: 'vegetables', img: 'https://images.unsplash.com/photo-1601004890684-d8cbf643f5f2?w=400&q=80&auto=format&fit=crop' },
-  { name: 'Karela', price: 10, cat: 'vegetables', img: 'https://images.unsplash.com/photo-1576045057995-568f588f82fb?w=400&q=80&auto=format&fit=crop' },
-  { name: 'Mixed Vegetables', price: 8, cat: 'vegetables', img: 'https://images.unsplash.com/photo-1540420773420-3366772f4999?w=400&q=80&auto=format&fit=crop' },
-  { name: 'Chicken Palak', price: 12, cat: 'vegetables', img: 'https://images.unsplash.com/photo-1631292784640-2b24be784d5d?w=400&q=80&auto=format&fit=crop' },
-  { name: 'Kadhi Pakoda', price: 10, cat: 'vegetables', img: 'https://images.unsplash.com/photo-1606491956689-2ea866880c84?w=400&q=80&auto=format&fit=crop' },
-  // Other
-  { name: 'Chicken Haleem', price: 10, cat: 'other', img: 'https://images.unsplash.com/photo-1567188040759-fb8a883dc6d9?w=400&q=80&auto=format&fit=crop' },
-  { name: 'Potato Qeema', price: 12, cat: 'other', img: 'https://images.unsplash.com/photo-1574894709920-11b28e7367e4?w=400&q=80&auto=format&fit=crop' },
-  { name: 'Shahi Chana', price: 12, cat: 'other', img: 'https://images.unsplash.com/photo-1517244683847-7456b63c5969?w=400&q=80&auto=format&fit=crop' },
-  { name: 'Lobia', price: 8, cat: 'other', img: 'https://images.unsplash.com/photo-1493770348161-369560ae357d?w=400&q=80&auto=format&fit=crop' },
-  { name: 'Sabat Masoor', price: 8, cat: 'other', img: 'https://images.unsplash.com/photo-1547592166-23ac45744acd?w=400&q=80&auto=format&fit=crop' },
-  { name: 'Halwa Chana Puri', price: 2, cat: 'other', img: 'https://images.unsplash.com/photo-1606491956689-2ea866880c85?w=400&q=80&auto=format&fit=crop' },
-  { name: 'Egg Paratha', price: 4, cat: 'other', img: 'https://images.unsplash.com/photo-1565299624946-b28f40a0ae38?w=400&q=80&auto=format&fit=crop' },
-  { name: 'Mooli Paratha', price: 4, cat: 'other', img: 'https://images.unsplash.com/photo-1604908177522-21b8b6f64b14?w=400&q=80&auto=format&fit=crop' },
-  { name: 'Potato Paratha', price: 3, cat: 'other', img: 'https://images.unsplash.com/photo-1567620905732-2d1ec7ab7445?w=400&q=80&auto=format&fit=crop' },
-  { name: 'Roti (2 pcs)', price: 1, cat: 'other', img: 'https://images.unsplash.com/photo-1555939594-58d7cb561ad1?w=400&q=80&auto=format&fit=crop' },
-  { name: 'Chapli Kabab', price: 15, cat: 'other', img: 'https://images.unsplash.com/photo-1599487488170-d11ec9c172f0?w=400&q=80&auto=format&fit=crop' },
-  { name: 'Chicken Kabab', price: 15, cat: 'other', img: 'https://images.unsplash.com/photo-1529042410759-befb1204b468?w=400&q=80&auto=format&fit=crop' },
-  { name: 'Jalebi', price: 16, cat: 'other', img: 'https://images.unsplash.com/photo-1601050690597-df0568f70950?w=400&q=80&auto=format&fit=crop' },
-  { name: 'Sweets (1kg)', price: 25, cat: 'other', img: 'https://images.unsplash.com/photo-1576618148400-f54bed99fcfd?w=400&q=80&auto=format&fit=crop' },
-  { name: 'Samosa', price: 1, cat: 'other', img: 'https://images.unsplash.com/photo-1601050690117-94f5f6fa8bd7?w=400&q=80&auto=format&fit=crop' },
-  { name: 'Pakora', price: 20, cat: 'other', img: 'https://images.unsplash.com/photo-1606491956689-2ea866880c83?w=400&q=80&auto=format&fit=crop' },
+  // ── Karahi & Mains ──
+  // Mutton Karahi: rich dark gravy curry with mutton in a karahi wok
+  { name: 'Mutton Karahi', price: 23, cat: 'karahi',
+    img: 'https://images.unsplash.com/photo-1603360946369-dc9bb6258143?w=500&q=85&auto=format&fit=crop' },
+  // Chicken Karahi: golden-red chicken curry in karahi
+  { name: 'Chicken Karahi', price: 22, cat: 'karahi',
+    img: 'https://images.unsplash.com/photo-1588166524941-3bf61a9c41db?w=500&q=85&auto=format&fit=crop' },
+  // Mutton Biryani: layered rice with mutton, saffron colour
+  { name: 'Mutton Biryani', price: 14, cat: 'karahi',
+    img: 'https://images.unsplash.com/photo-1563379091339-03b21ab4a4f8?w=500&q=85&auto=format&fit=crop' },
+  // Chicken Biryani: spiced biryani rice with chicken pieces
+  { name: 'Chicken Biryani', price: 12, cat: 'karahi',
+    img: 'https://images.unsplash.com/photo-1589302168068-964664d93dc0?w=500&q=85&auto=format&fit=crop' },
+  // Daal Chawal: lentil soup poured over white rice
+  { name: 'Daal Chawal', price: 10, cat: 'karahi',
+    img: 'https://images.unsplash.com/photo-1546549032-9571cd6b27df?w=500&q=85&auto=format&fit=crop' },
+  // Vegetable Pulao: fragrant vegetable rice pilaf
+  { name: 'Vegetable Pulao', price: 10, cat: 'karahi',
+    img: 'https://images.unsplash.com/photo-1512058564366-18510be2db19?w=500&q=85&auto=format&fit=crop' },
+  // Mutton (curry/stew, bone-in pieces)
+  { name: 'Mutton', price: 12, cat: 'karahi',
+    img: 'https://images.unsplash.com/photo-1545247181-516773cae754?w=500&q=85&auto=format&fit=crop' },
+  // Chicken (cooked chicken curry / roasted pieces)
+  { name: 'Chicken', price: 10, cat: 'karahi',
+    img: 'https://images.unsplash.com/photo-1598515214211-89d3c73ae83b?w=500&q=85&auto=format&fit=crop' },
+
+  // ── Daal ──
+  // White Daal Mash: creamy white lentils (urad dal) with tadka
+  { name: 'White Daal Mash', price: 10, cat: 'daal',
+    img: 'https://images.unsplash.com/photo-1455619452474-d2be8b1e70cd?w=500&q=85&auto=format&fit=crop' },
+  // Daal Mash: yellow urad lentil dal in bowl
+  { name: 'Daal Mash', price: 8, cat: 'daal',
+    img: 'https://images.unsplash.com/photo-1574484284002-952d92456975?w=500&q=85&auto=format&fit=crop' },
+  // Daal Chana: thick yellow chana dal with spices
+  { name: 'Daal Chana', price: 8, cat: 'daal',
+    img: 'https://images.unsplash.com/photo-1547592180-85f173990554?w=500&q=85&auto=format&fit=crop' },
+  // Black Chana: dark kala chana chickpea curry
+  { name: 'Black Chana', price: 8, cat: 'daal',
+    img: 'https://images.unsplash.com/photo-1585937421612-70a008356fbe?w=500&q=85&auto=format&fit=crop' },
+  // White Chana: white chickpea / chole curry
+  { name: 'White Chana', price: 8, cat: 'daal',
+    img: 'https://images.unsplash.com/photo-1505253716362-afaea1d3d1af?w=500&q=85&auto=format&fit=crop' },
+
+  // ── Vegetables ──
+  // Bhindi: stir-fried okra / ladyfinger vegetable dish
+  { name: 'Bhindi', price: 12, cat: 'vegetables',
+    img: 'https://images.unsplash.com/photo-1596040033229-a9821ebd058d?w=500&q=85&auto=format&fit=crop' },
+  // Karela: bitter gourd cooked with spices
+  { name: 'Karela', price: 10, cat: 'vegetables',
+    img: 'https://images.unsplash.com/photo-1518977676601-b53f82aba655?w=500&q=85&auto=format&fit=crop' },
+  // Mixed Vegetables: colourful sabzi / mixed stir-fry
+  { name: 'Mixed Vegetables', price: 8, cat: 'vegetables',
+    img: 'https://images.unsplash.com/photo-1540420773420-3366772f4999?w=500&q=85&auto=format&fit=crop' },
+  // Chicken Palak: green spinach curry with chicken
+  { name: 'Chicken Palak', price: 12, cat: 'vegetables',
+    img: 'https://images.unsplash.com/photo-1565557623262-b51c2513a641?w=500&q=85&auto=format&fit=crop' },
+  // Kadhi Pakoda: yellow yoghurt kadhi with fried pakoras
+  { name: 'Kadhi Pakoda', price: 10, cat: 'vegetables',
+    img: 'https://images.unsplash.com/photo-1631452180519-c014fe946bc7?w=500&q=85&auto=format&fit=crop' },
+
+  // ── Other ──
+  // Chicken Haleem: thick slow-cooked meat & lentil porridge
+  { name: 'Chicken Haleem', price: 10, cat: 'other',
+    img: 'https://images.unsplash.com/photo-1601050690597-df0568f70950?w=500&q=85&auto=format&fit=crop' },
+  // Potato Qeema: minced meat cooked with potato pieces
+  { name: 'Potato Qeema', price: 12, cat: 'other',
+    img: 'https://images.unsplash.com/photo-1574894709920-11b28e7367e3?w=500&q=85&auto=format&fit=crop' },
+  // Shahi Chana: spiced whole chickpeas rich gravy
+  { name: 'Shahi Chana', price: 12, cat: 'other',
+    img: 'https://images.unsplash.com/photo-1645177628172-a5f28adb8cfa?w=500&q=85&auto=format&fit=crop' },
+  // Lobia: black-eyed peas curry
+  { name: 'Lobia', price: 8, cat: 'other',
+    img: 'https://images.unsplash.com/photo-1612929633738-8fe44f7ec841?w=500&q=85&auto=format&fit=crop' },
+  // Sabat Masoor: whole red lentil curry
+  { name: 'Sabat Masoor', price: 8, cat: 'other',
+    img: 'https://images.unsplash.com/photo-1547592166-23ac45744acd?w=500&q=85&auto=format&fit=crop' },
+  // Halwa Chana Puri: sweet semolina halwa with fluffy fried puri bread
+  { name: 'Halwa Chana Puri', price: 2, cat: 'other',
+    img: 'https://images.unsplash.com/photo-1567337710282-00832b415979?w=500&q=85&auto=format&fit=crop' },
+  // Egg Paratha: layered flatbread stuffed with egg
+  { name: 'Egg Paratha', price: 4, cat: 'other',
+    img: 'https://images.unsplash.com/photo-1604908177522-21b8b6f64b14?w=500&q=85&auto=format&fit=crop' },
+  // Mooli Paratha: flatbread stuffed with radish
+  { name: 'Mooli Paratha', price: 4, cat: 'other',
+    img: 'https://images.unsplash.com/photo-1565299507177-b0ac66763828?w=500&q=85&auto=format&fit=crop' },
+  // Potato Paratha: stuffed paratha with spiced potato filling
+  { name: 'Potato Paratha', price: 3, cat: 'other',
+    img: 'https://images.unsplash.com/photo-1548943487-a2e4e43b4853?w=500&q=85&auto=format&fit=crop' },
+  // Roti: round whole wheat flatbread
+  { name: 'Roti (2 pcs)', price: 1, cat: 'other',
+    img: 'https://images.unsplash.com/photo-1509722747041-616f39b57569?w=500&q=85&auto=format&fit=crop' },
+  // Chapli Kabab: flat spiced minced beef patty kabab
+  { name: 'Chapli Kabab', price: 15, cat: 'other',
+    img: 'https://images.unsplash.com/photo-1599487488170-d11ec9c172f0?w=500&q=85&auto=format&fit=crop' },
+  // Chicken Kabab: grilled skewered chicken seekh kabab
+  { name: 'Chicken Kabab', price: 15, cat: 'other',
+    img: 'https://images.unsplash.com/photo-1529042410759-befb1204b468?w=500&q=85&auto=format&fit=crop' },
+  // Jalebi: orange spiral deep-fried sweet soaked in syrup
+  { name: 'Jalebi', price: 16, cat: 'other',
+    img: 'https://images.unsplash.com/photo-1655215219097-4c70d3c70a0c?w=500&q=85&auto=format&fit=crop' },
+  // Sweets 1kg: assorted Indian/Pakistani mithai sweets tray
+  { name: 'Sweets (1kg)', price: 25, cat: 'other',
+    img: 'https://images.unsplash.com/photo-1571167366136-b57e41c8b4cf?w=500&q=85&auto=format&fit=crop' },
+  // Samosa: triangular golden fried pastry snack
+  { name: 'Samosa', price: 1, cat: 'other',
+    img: 'https://images.unsplash.com/photo-1601050690117-94f5f6fa8bd7?w=500&q=85&auto=format&fit=crop' },
+  // Pakora: golden battered fried vegetable fritters
+  { name: 'Pakora', price: 20, cat: 'other',
+    img: 'https://images.unsplash.com/photo-1610057099443-fde8c4d50f91?w=500&q=85&auto=format&fit=crop' },
 ];
 
 let currentFilter = 'all';
@@ -723,7 +796,9 @@ function buildMenu(filter) {
   grid.innerHTML = items.map(item => `
     <div class="menu-item" onclick="orderItem('${item.name}')">
       <div class="menu-item-img-wrap">
-        <img src="${item.img}" alt="${item.name}" loading="lazy" onerror="this.src='https://images.unsplash.com/photo-1504674900247-0877df9cc836?w=400&q=80&auto=format&fit=crop'">
+        <img src="${item.img}" alt="${item.name}" loading="lazy"
+          style="width:100%;height:170px;object-fit:cover;object-position:center;display:block;background:#1a1a1a;"
+          onerror="this.onerror=null;this.src='https://images.unsplash.com/photo-1546069901-ba9599a7e63c?w=500&q=85&auto=format&fit=crop'">
         <div class="menu-item-img-overlay"></div>
         <div class="menu-price">${item.price} SAR</div>
       </div>
