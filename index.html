@@ -98,44 +98,53 @@ header {
 .header-phone svg { flex-shrink: 0; }
 
 /* ═══════════════════════════════════════════
-   HERO BANNER
+   HERO — SPLIT LAYOUT (no images)
 ═══════════════════════════════════════════ */
 .hero {
   background: var(--dark2);
-  padding: 4.5rem 5% 3.5rem;
-  text-align: center;
+  padding: 0;
   position: relative; overflow: hidden;
+  min-height: 520px;
+  display: flex; align-items: stretch;
 }
 
-/* Decorative background pattern */
+/* Full-bleed diagonal background slice */
 .hero::before {
   content: '';
   position: absolute; inset: 0;
   background:
-    radial-gradient(ellipse 60% 50% at 20% 50%, rgba(255,107,0,0.12) 0%, transparent 70%),
-    radial-gradient(ellipse 50% 60% at 80% 50%, rgba(232,25,44,0.1) 0%, transparent 70%),
-    radial-gradient(ellipse 40% 40% at 50% 100%, rgba(255,214,0,0.08) 0%, transparent 60%);
-  pointer-events: none;
+    radial-gradient(ellipse 55% 70% at 0% 50%, rgba(255,107,0,0.13) 0%, transparent 65%),
+    radial-gradient(ellipse 45% 60% at 100% 50%, rgba(232,25,44,0.09) 0%, transparent 65%),
+    radial-gradient(ellipse 60% 40% at 50% 100%, rgba(255,214,0,0.07) 0%, transparent 55%);
+  pointer-events: none; z-index: 0;
 }
-
-/* Geometric dots */
+/* Dot grid */
 .hero::after {
   content: '';
   position: absolute; inset: 0;
-  background-image: radial-gradient(circle, rgba(255,214,0,0.06) 1px, transparent 1px);
-  background-size: 28px 28px;
-  pointer-events: none;
+  background-image: radial-gradient(circle, rgba(255,214,0,0.055) 1px, transparent 1px);
+  background-size: 26px 26px;
+  pointer-events: none; z-index: 0;
 }
 
-.hero-content { position: relative; z-index: 1; max-width: 700px; margin: 0 auto; }
+.hero-inner {
+  position: relative; z-index: 1;
+  max-width: 1100px; margin: 0 auto; width: 100%;
+  display: grid; grid-template-columns: 1fr 420px;
+  align-items: center; gap: 3rem;
+  padding: 4rem 5%;
+}
+
+/* ── LEFT: text ── */
+.hero-left { display: flex; flex-direction: column; gap: 0; }
 
 .hero-badge {
   display: inline-flex; align-items: center; gap: 8px;
   background: rgba(255,214,0,0.1); border: 1px solid rgba(255,214,0,0.3);
-  color: var(--yellow); font-size: 0.7rem; font-weight: 600;
+  color: var(--yellow); font-size: 0.68rem; font-weight: 600;
   letter-spacing: 0.22em; text-transform: uppercase;
-  padding: 0.4rem 1rem; border-radius: 50px;
-  margin-bottom: 1.4rem;
+  padding: 0.38rem 0.95rem; border-radius: 50px;
+  margin-bottom: 1.3rem; align-self: flex-start;
   animation: fadeDown 0.7s ease both;
 }
 .hero-badge .dot {
@@ -147,32 +156,210 @@ header {
 .hero-title {
   font-family: 'Montserrat', sans-serif;
   font-weight: 900;
-  font-size: clamp(2.2rem, 6vw, 4.2rem);
-  line-height: 1.05; letter-spacing: -0.02em;
+  font-size: clamp(2.4rem, 5vw, 4rem);
+  line-height: 1.0; letter-spacing: -0.025em;
   color: var(--white);
-  margin-bottom: 0.5rem;
+  margin-bottom: 0.6rem;
   animation: fadeDown 0.7s ease 0.1s both;
 }
-.hero-title .accent { color: var(--yellow); }
+.hero-title .accent { color: var(--yellow); display: block; }
+.hero-title .rest   { color: var(--white); font-size: 0.52em; font-weight: 700; letter-spacing: 0.02em; display: block; margin-top: 0.1em; }
 
 .hero-tagline {
-  font-size: clamp(0.85rem, 2vw, 1rem);
+  font-size: clamp(0.88rem, 1.8vw, 1.05rem);
   color: var(--muted); font-weight: 300;
-  margin-bottom: 2rem; letter-spacing: 0.05em;
+  margin-bottom: 1.8rem; letter-spacing: 0.04em;
   animation: fadeDown 0.7s ease 0.2s both;
+  line-height: 1.6;
 }
+.hero-tagline strong { color: var(--text); font-weight: 500; }
 
 .hero-chips {
-  display: flex; flex-wrap: wrap; justify-content: center; gap: 0.6rem;
+  display: flex; flex-wrap: wrap; gap: 0.55rem;
   animation: fadeDown 0.7s ease 0.3s both;
+  margin-bottom: 2rem;
 }
 .chip {
   background: var(--dark3); border: 1px solid var(--border);
-  color: var(--text); font-size: 0.75rem; font-weight: 500;
-  padding: 0.35rem 0.85rem; border-radius: 50px;
+  color: var(--text); font-size: 0.72rem; font-weight: 500;
+  padding: 0.32rem 0.8rem; border-radius: 50px;
   display: flex; align-items: center; gap: 5px;
 }
-.chip span { font-size: 0.9rem; }
+.chip span { font-size: 0.88rem; }
+
+.hero-ctas {
+  display: flex; gap: 0.8rem; flex-wrap: wrap;
+  animation: fadeDown 0.7s ease 0.4s both;
+}
+.hero-btn-primary {
+  display: inline-flex; align-items: center; gap: 7px;
+  background: var(--yellow); color: var(--dark);
+  padding: 0.75rem 1.5rem; border-radius: 50px;
+  font-weight: 700; font-size: 0.85rem; letter-spacing: 0.02em;
+  text-decoration: none;
+  box-shadow: 0 4px 20px rgba(255,214,0,0.35);
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+.hero-btn-primary:hover { transform: translateY(-2px); box-shadow: 0 6px 28px rgba(255,214,0,0.5); }
+.hero-btn-secondary {
+  display: inline-flex; align-items: center; gap: 7px;
+  background: transparent; color: var(--text);
+  padding: 0.75rem 1.5rem; border-radius: 50px;
+  font-weight: 600; font-size: 0.85rem;
+  text-decoration: none; border: 1px solid rgba(255,255,255,0.15);
+  transition: border-color 0.2s, color 0.2s;
+}
+.hero-btn-secondary:hover { border-color: var(--yellow); color: var(--yellow); }
+
+/* ── RIGHT: decorative visual ── */
+.hero-visual {
+  display: flex; align-items: center; justify-content: center;
+  animation: fadeDown 0.9s ease 0.2s both;
+  position: relative;
+}
+
+/* Outer glow ring */
+.hero-plate-outer {
+  width: 340px; height: 340px; border-radius: 50%;
+  background: conic-gradient(
+    from 0deg,
+    rgba(255,214,0,0.25) 0deg,
+    rgba(255,107,0,0.2) 90deg,
+    rgba(232,25,44,0.15) 180deg,
+    rgba(255,214,0,0.1) 270deg,
+    rgba(255,214,0,0.25) 360deg
+  );
+  display: flex; align-items: center; justify-content: center;
+  position: relative;
+  animation: spinSlow 18s linear infinite;
+  flex-shrink: 0;
+}
+
+/* Dashed orbit ring */
+.hero-plate-outer::before {
+  content: '';
+  position: absolute; inset: 8px; border-radius: 50%;
+  border: 1.5px dashed rgba(255,214,0,0.2);
+}
+
+/* Middle ring */
+.hero-plate-mid {
+  width: 290px; height: 290px; border-radius: 50%;
+  background: radial-gradient(circle at 38% 38%,
+    rgba(255,214,0,0.12) 0%,
+    rgba(255,107,0,0.08) 40%,
+    rgba(20,20,20,0.95) 70%
+  );
+  border: 1px solid rgba(255,214,0,0.18);
+  display: flex; align-items: center; justify-content: center;
+  position: absolute;
+}
+
+/* Inner plate */
+.hero-plate-inner {
+  width: 230px; height: 230px; border-radius: 50%;
+  background: radial-gradient(circle at 40% 35%,
+    #2e2000 0%,
+    #1a1200 40%,
+    #0f0a00 100%
+  );
+  border: 2px solid rgba(255,214,0,0.3);
+  display: flex; flex-direction: column;
+  align-items: center; justify-content: center;
+  gap: 4px;
+  position: absolute;
+  box-shadow:
+    inset 0 0 40px rgba(255,214,0,0.08),
+    0 0 50px rgba(255,107,0,0.12),
+    0 0 100px rgba(255,214,0,0.06);
+}
+
+/* Food emoji cluster inside the plate */
+.plate-emoji-main {
+  font-size: 3.8rem;
+  line-height: 1;
+  filter: drop-shadow(0 4px 12px rgba(255,107,0,0.5));
+  animation: floatEmoji 4s ease-in-out infinite;
+}
+.plate-emoji-sub {
+  display: flex; gap: 0.5rem;
+  font-size: 1.3rem;
+  opacity: 0.85;
+}
+.plate-label {
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 700; font-size: 0.6rem;
+  letter-spacing: 0.22em; text-transform: uppercase;
+  color: var(--yellow); opacity: 0.7;
+  margin-top: 4px;
+}
+
+/* Orbiting food badges */
+.orbit-badge {
+  position: absolute;
+  background: var(--dark3);
+  border: 1px solid var(--border);
+  border-radius: 50px;
+  padding: 0.3rem 0.65rem;
+  font-size: 0.7rem; font-weight: 600; color: var(--text);
+  display: flex; align-items: center; gap: 5px;
+  white-space: nowrap;
+  box-shadow: 0 4px 16px rgba(0,0,0,0.4);
+}
+.orbit-badge .ob-icon { font-size: 0.9rem; }
+
+.orbit-1 { top: 10px; right: -10px; animation: floatBadge 5s ease-in-out infinite; }
+.orbit-2 { bottom: 40px; right: -20px; animation: floatBadge 5s ease-in-out 1.2s infinite; }
+.orbit-3 { bottom: 10px; left: -10px; animation: floatBadge 5s ease-in-out 0.6s infinite; }
+.orbit-4 { top: 40px; left: -20px; animation: floatBadge 5s ease-in-out 1.8s infinite; }
+
+/* Gold stars scattered */
+.hero-star {
+  position: absolute;
+  color: var(--yellow);
+  font-size: 0.8rem; opacity: 0;
+  animation: starPop 4s ease-in-out infinite;
+}
+.hero-star:nth-child(1) { top: 8%; left: 12%; animation-delay: 0s; }
+.hero-star:nth-child(2) { top: 15%; right: 10%; animation-delay: 1s; }
+.hero-star:nth-child(3) { bottom: 12%; right: 8%; animation-delay: 2s; }
+.hero-star:nth-child(4) { bottom: 8%; left: 15%; animation-delay: 0.5s; }
+
+@keyframes spinSlow {
+  from { transform: rotate(0deg); }
+  to   { transform: rotate(360deg); }
+}
+@keyframes floatEmoji {
+  0%, 100% { transform: translateY(0) scale(1); }
+  50%       { transform: translateY(-8px) scale(1.04); }
+}
+@keyframes floatBadge {
+  0%, 100% { transform: translateY(0); }
+  50%       { transform: translateY(-6px); }
+}
+@keyframes starPop {
+  0%, 80%, 100% { opacity: 0; transform: scale(0.5) rotate(0deg); }
+  40%            { opacity: 0.8; transform: scale(1.2) rotate(20deg); }
+}
+
+/* Hero responsive */
+@media (max-width: 860px) {
+  .hero-inner {
+    grid-template-columns: 1fr;
+    text-align: center;
+    padding: 3rem 5% 2.5rem;
+    gap: 2.5rem;
+  }
+  .hero-left { align-items: center; }
+  .hero-badge { align-self: center; }
+  .hero-ctas { justify-content: center; }
+  .hero-chips { justify-content: center; }
+  .hero-plate-outer { width: 260px; height: 260px; }
+  .hero-plate-mid   { width: 220px; height: 220px; }
+  .hero-plate-inner { width: 175px; height: 175px; }
+  .plate-emoji-main { font-size: 2.8rem; }
+  .orbit-1, .orbit-2, .orbit-3, .orbit-4 { display: none; }
+}
 
 /* ═══════════════════════════════════════════
    SECTION SHARED
@@ -201,89 +388,214 @@ header {
 }
 
 /* ═══════════════════════════════════════════
-   MENU SECTION
+   MENU SECTION — FANCY REDESIGN
 ═══════════════════════════════════════════ */
-#menu { background: var(--dark); }
+#menu {
+  background: var(--dark);
+  position: relative; overflow: hidden;
+}
+#menu::before {
+  content: '';
+  position: absolute; inset: 0;
+  background:
+    radial-gradient(ellipse 50% 40% at 0% 50%, rgba(255,107,0,0.06) 0%, transparent 60%),
+    radial-gradient(ellipse 40% 50% at 100% 50%, rgba(255,214,0,0.05) 0%, transparent 60%);
+  pointer-events: none;
+}
 
 .menu-columns {
   display: grid;
   grid-template-columns: 1fr 1fr;
-  gap: 1.5rem;
+  gap: 2rem;
+  position: relative; z-index: 1;
 }
 
+/* Column card — glassy dark with glowing border */
 .menu-col {
-  background: var(--dark2);
-  border: 1px solid var(--border);
-  border-radius: var(--radius);
+  background: linear-gradient(160deg, rgba(40,28,0,0.6) 0%, rgba(20,20,20,0.9) 60%);
+  border: 1px solid rgba(255,214,0,0.2);
+  border-radius: 20px;
   overflow: hidden;
+  box-shadow:
+    0 0 0 1px rgba(255,214,0,0.06) inset,
+    0 20px 60px rgba(0,0,0,0.5),
+    0 0 80px rgba(255,107,0,0.04);
+  transition: box-shadow 0.35s;
+}
+.menu-col:hover {
+  box-shadow:
+    0 0 0 1px rgba(255,214,0,0.15) inset,
+    0 24px 70px rgba(0,0,0,0.6),
+    0 0 100px rgba(255,214,0,0.07);
 }
 
+/* Column header — bold gradient bar */
 .menu-col-header {
-  background: linear-gradient(135deg, var(--dark3) 0%, var(--dark4) 100%);
-  padding: 1rem 1.4rem;
-  display: flex; align-items: center; gap: 10px;
-  border-bottom: 2px solid var(--yellow);
+  padding: 1.1rem 1.6rem;
+  display: flex; align-items: center; gap: 12px;
+  background: linear-gradient(90deg, rgba(255,107,0,0.18) 0%, rgba(255,214,0,0.08) 60%, transparent 100%);
+  border-bottom: 1px solid rgba(255,214,0,0.15);
+  position: relative;
+}
+.menu-col-header::after {
+  content: '';
+  position: absolute; bottom: 0; left: 0; right: 0; height: 2px;
+  background: linear-gradient(90deg, var(--orange), var(--yellow), transparent);
 }
 .menu-col-header-icon {
-  width: 32px; height: 32px; border-radius: 8px;
-  background: var(--yellow);
+  width: 36px; height: 36px; border-radius: 10px;
+  background: linear-gradient(135deg, var(--orange), var(--yellow));
   display: flex; align-items: center; justify-content: center;
-  font-size: 1rem; flex-shrink: 0;
+  font-size: 1.1rem; flex-shrink: 0;
+  box-shadow: 0 4px 12px rgba(255,107,0,0.4);
 }
 .menu-col-title {
   font-family: 'Montserrat', sans-serif;
-  font-weight: 700; font-size: 0.95rem;
-  color: var(--white); letter-spacing: 0.02em;
+  font-weight: 800; font-size: 1rem;
+  color: var(--white); letter-spacing: 0.01em;
+}
+.menu-col-count {
+  margin-left: auto;
+  background: rgba(255,214,0,0.12);
+  border: 1px solid rgba(255,214,0,0.2);
+  color: var(--yellow);
+  font-size: 0.65rem; font-weight: 700;
+  padding: 0.2rem 0.6rem; border-radius: 50px;
+  letter-spacing: 0.1em;
 }
 
-.menu-list { list-style: none; padding: 0.5rem 0; }
+.menu-list { list-style: none; padding: 0.6rem 0; }
 
+/* Each row — hover glow effect */
 .menu-row {
-  display: flex; align-items: center; justify-content: space-between;
-  padding: 0.7rem 1.4rem; gap: 1rem;
-  cursor: pointer;
-  transition: background 0.18s;
+  display: flex; align-items: center;
+  padding: 0.72rem 1.6rem; gap: 0.8rem;
+  cursor: pointer; user-select: none;
   border-left: 3px solid transparent;
   position: relative;
+  transition: background 0.2s, border-color 0.2s;
+  -webkit-tap-highlight-color: transparent;
 }
+/* subtle row separator */
 .menu-row:not(:last-child)::after {
   content: '';
-  position: absolute; bottom: 0; left: 1.4rem; right: 1.4rem;
-  height: 1px; background: rgba(255,255,255,0.04);
+  position: absolute; bottom: 0; left: 1.6rem; right: 1.6rem;
+  height: 1px;
+  background: linear-gradient(to right, rgba(255,214,0,0.08), transparent);
 }
+
+/* hover state */
 .menu-row:hover {
-  background: rgba(255,214,0,0.05);
-  border-left-color: var(--yellow);
+  background: linear-gradient(90deg, rgba(255,107,0,0.09) 0%, rgba(255,214,0,0.05) 60%, transparent 100%);
+  border-left-color: var(--orange);
+}
+
+/* long-press / active ripple */
+.menu-row.pressing {
+  background: linear-gradient(90deg, rgba(37,211,102,0.12) 0%, rgba(37,211,102,0.05) 60%, transparent 100%);
+  border-left-color: #25D366;
+}
+.menu-row.pressing .menu-row-name { color: #25D366; }
+.menu-row.pressing .menu-row-price { color: #25D366; }
+
+/* row number badge */
+.menu-row-num {
+  font-size: 0.6rem; font-weight: 700; color: var(--muted);
+  min-width: 18px; text-align: center;
+  opacity: 0.5; flex-shrink: 0;
 }
 
 .menu-row-name {
-  font-size: 0.88rem; font-weight: 400; color: var(--text);
-  flex: 1; min-width: 0;
-  transition: color 0.18s;
+  font-size: 0.875rem; font-weight: 500; color: var(--text);
+  flex: 1; min-width: 0; line-height: 1.3;
+  transition: color 0.2s;
 }
 .menu-row:hover .menu-row-name { color: var(--yellow); }
 
+/* animated dotted leader */
 .menu-row-dots {
-  flex: 1; min-width: 20px; max-width: 60px;
+  flex: 1; min-width: 16px; max-width: 48px;
   height: 1px;
-  background: repeating-linear-gradient(to right, var(--dark4) 0, var(--dark4) 3px, transparent 3px, transparent 7px);
-  margin: 0 0.5rem; opacity: 0.6;
+  background: repeating-linear-gradient(to right,
+    rgba(255,214,0,0.25) 0, rgba(255,214,0,0.25) 3px,
+    transparent 3px, transparent 8px);
+  flex-shrink: 1;
 }
 
+/* price badge */
 .menu-row-price {
   font-family: 'Montserrat', sans-serif;
-  font-weight: 700; font-size: 0.9rem;
+  font-weight: 800; font-size: 0.88rem;
   color: var(--yellow); white-space: nowrap; flex-shrink: 0;
+  background: rgba(255,214,0,0.08);
+  border: 1px solid rgba(255,214,0,0.18);
+  padding: 0.18rem 0.55rem; border-radius: 6px;
+  transition: background 0.2s, color 0.2s, border-color 0.2s;
 }
-.menu-row-price::before { content: 'SAR '; font-size: 0.65rem; font-weight: 500; color: var(--orange); }
+.menu-row-price::before {
+  content: 'SAR ';
+  font-size: 0.58rem; font-weight: 600;
+  color: var(--orange); letter-spacing: 0.05em;
+}
+.menu-row:hover .menu-row-price {
+  background: rgba(255,214,0,0.14);
+  border-color: rgba(255,214,0,0.35);
+}
 
-/* WhatsApp order hint on hover */
-.menu-row-order {
-  font-size: 0.65rem; color: #25D366; font-weight: 600;
-  opacity: 0; transform: translateX(4px); transition: 0.2s;
-  white-space: nowrap; flex-shrink: 0;
+/* WhatsApp quick-order label (shows on hover + on hold) */
+.menu-row-wa {
+  display: flex; align-items: center; gap: 4px;
+  font-size: 0.62rem; color: #25D366; font-weight: 700;
+  opacity: 0; transform: translateX(6px);
+  transition: opacity 0.2s, transform 0.2s;
+  white-space: nowrap; flex-shrink: 0; letter-spacing: 0.03em;
 }
-.menu-row:hover .menu-row-order { opacity: 1; transform: translateX(0); }
+.menu-row:hover .menu-row-wa,
+.menu-row.pressing .menu-row-wa { opacity: 1; transform: translateX(0); }
+
+/* hold progress ring overlay */
+.menu-row-hold {
+  position: absolute; inset: 0;
+  border-radius: inherit;
+  background: linear-gradient(90deg, rgba(37,211,102,0.08) 0%, transparent 100%);
+  transform: scaleX(0); transform-origin: left;
+  transition: transform 0s linear;
+  pointer-events: none;
+}
+.menu-row.pressing .menu-row-hold {
+  transform: scaleX(1);
+  transition: transform 0.65s linear;
+}
+
+/* hold countdown ring (corner) */
+.hold-toast {
+  position: fixed; bottom: 5rem; left: 50%; transform: translateX(-50%);
+  background: #25D366; color: #000;
+  font-size: 0.78rem; font-weight: 700;
+  padding: 0.55rem 1.2rem; border-radius: 50px;
+  display: flex; align-items: center; gap: 6px;
+  box-shadow: 0 4px 20px rgba(37,211,102,0.4);
+  opacity: 0; pointer-events: none;
+  transition: opacity 0.2s; z-index: 9999;
+  white-space: nowrap;
+}
+.hold-toast.show { opacity: 1; }
+
+/* menu footer note */
+.menu-foot-note {
+  text-align: center; margin-top: 2rem;
+  font-size: 0.75rem; color: var(--muted);
+  display: flex; align-items: center; justify-content: center; gap: 10px;
+  flex-wrap: wrap;
+}
+.menu-foot-note span.pipe { opacity: 0.3; }
+.menu-foot-tip {
+  display: inline-flex; align-items: center; gap: 6px;
+  background: rgba(37,211,102,0.08);
+  border: 1px solid rgba(37,211,102,0.2);
+  color: #25D366; padding: 0.3rem 0.85rem; border-radius: 50px;
+  font-size: 0.72rem; font-weight: 600;
+}
 
 /* ═══════════════════════════════════════════
    INFO STRIP
@@ -441,6 +753,46 @@ footer {
 }
 
 /* ═══════════════════════════════════════════
+   MAP SECTION
+═══════════════════════════════════════════ */
+.map-wrap {
+  border-radius: 20px; overflow: hidden;
+  border: 1px solid rgba(255,214,0,0.2);
+  box-shadow: 0 20px 60px rgba(0,0,0,0.5);
+}
+.map-info-bar {
+  background: linear-gradient(90deg, rgba(40,28,0,0.95) 0%, rgba(28,20,0,0.98) 100%);
+  padding: 1rem 1.5rem;
+  display: flex; align-items: center; gap: 2rem;
+  flex-wrap: wrap;
+  border-bottom: 1px solid rgba(255,214,0,0.15);
+}
+.map-info-item {
+  display: flex; align-items: center; gap: 10px;
+}
+.map-info-icon { font-size: 1.1rem; }
+.map-info-label {
+  font-size: 0.62rem; font-weight: 600; letter-spacing: 0.16em;
+  text-transform: uppercase; color: var(--muted); margin-bottom: 2px;
+}
+.map-info-val {
+  font-size: 0.82rem; font-weight: 500; color: var(--text);
+}
+.map-directions-btn {
+  margin-left: auto;
+  display: inline-flex; align-items: center; gap: 6px;
+  background: var(--yellow); color: var(--dark);
+  padding: 0.5rem 1.1rem; border-radius: 50px;
+  font-size: 0.78rem; font-weight: 700;
+  text-decoration: none; white-space: nowrap;
+  box-shadow: 0 3px 14px rgba(255,214,0,0.3);
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+.map-directions-btn:hover { transform: translateY(-2px); box-shadow: 0 5px 20px rgba(255,214,0,0.45); }
+.map-frame { position: relative; }
+.map-frame iframe { filter: saturate(0.9) brightness(0.95); }
+
+/* ═══════════════════════════════════════════
    FLOATING BUTTONS
 ═══════════════════════════════════════════ */
 .fab-wrap {
@@ -569,19 +921,67 @@ footer {
 
 <!-- ══════════════════ HERO ══════════════════ -->
 <section class="hero">
-  <div class="hero-content">
-    <div class="hero-badge"><div class="dot"></div> Now Open · Dammam</div>
-    <h1 class="hero-title">
-      Hijaz <span class="accent">Stars</span><br>Restaurant
-    </h1>
-    <p class="hero-tagline">Authentic Pakistani Cuisine — Taste the Tradition</p>
-    <div class="hero-chips">
-      <div class="chip"><span>🍛</span> Fresh Daily</div>
-      <div class="chip"><span>🥩</span> 100% Halal</div>
-      <div class="chip"><span>💰</span> Best Prices</div>
-      <div class="chip"><span>📦</span> Takeaway</div>
-      <div class="chip"><span>⭐</span> Dine In</div>
+  <!-- scattered stars -->
+  <span class="hero-star">✦</span>
+  <span class="hero-star">✦</span>
+  <span class="hero-star">★</span>
+  <span class="hero-star">✦</span>
+
+  <div class="hero-inner">
+
+    <!-- LEFT: branding & text -->
+    <div class="hero-left">
+      <div class="hero-badge"><div class="dot"></div> Now Open · Dammam, KSA</div>
+
+      <h1 class="hero-title">
+        <span class="accent">Hijaz Stars</span>
+        <span class="rest">Restaurant</span>
+      </h1>
+
+      <p class="hero-tagline">
+        <strong>Authentic Pakistani Cuisine</strong> — freshly cooked daily.<br>
+        Karahi, Biryani, Daal, Kababs &amp; more at unbeatable prices.
+      </p>
+
+      <div class="hero-chips">
+        <div class="chip"><span>🥩</span> 100% Halal</div>
+        <div class="chip"><span>🔥</span> Fresh Daily</div>
+        <div class="chip"><span>💰</span> Best Prices</div>
+        <div class="chip"><span>📦</span> Takeaway</div>
+      </div>
+
+      <div class="hero-ctas">
+        <a href="https://wa.me/966580210732" target="_blank" class="hero-btn-primary">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+          Order on WhatsApp
+        </a>
+        <a href="#menu" class="hero-btn-secondary">
+          View Full Menu ↓
+        </a>
+      </div>
     </div>
+
+    <!-- RIGHT: decorative plate visual -->
+    <div class="hero-visual">
+      <!-- floating orbit badges -->
+      <div class="orbit-badge orbit-1"><span class="ob-icon">🍛</span> Biryani</div>
+      <div class="orbit-badge orbit-2"><span class="ob-icon">🔥</span> Karahi</div>
+      <div class="orbit-badge orbit-3"><span class="ob-icon">🫓</span> Paratha</div>
+      <div class="orbit-badge orbit-4"><span class="ob-icon">🍢</span> Kabab</div>
+
+      <div class="hero-plate-outer">
+        <div class="hero-plate-mid">
+          <div class="hero-plate-inner">
+            <div class="plate-emoji-main">🍽️</div>
+            <div class="plate-emoji-sub">
+              <span>🍛</span><span>🥘</span><span>🍖</span>
+            </div>
+            <div class="plate-label">Taste the Tradition</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
   </div>
 </section>
 
@@ -626,6 +1026,9 @@ footer {
       <div class="section-label">🍽️ Our Menu</div>
       <h2 class="section-title">Fresh Meals, <span class="hl">Great Prices</span></h2>
       <div class="section-divider"></div>
+      <p style="margin-top:0.8rem;font-size:0.8rem;color:var(--muted);">
+        Hold any item for 1 second to instantly order it on WhatsApp
+      </p>
     </div>
 
     <div class="menu-columns">
@@ -634,7 +1037,8 @@ footer {
       <div class="menu-col reveal">
         <div class="menu-col-header">
           <div class="menu-col-header-icon">🍲</div>
-          <div class="menu-col-title">Specials & Snacks</div>
+          <div class="menu-col-title">Specials &amp; Snacks</div>
+          <div class="menu-col-count" id="leftCount"></div>
         </div>
         <ul class="menu-list" id="leftMenu"></ul>
       </div>
@@ -643,16 +1047,22 @@ footer {
       <div class="menu-col reveal delay-1">
         <div class="menu-col-header">
           <div class="menu-col-header-icon">🍛</div>
-          <div class="menu-col-title">Karahi, Biryani & Daal</div>
+          <div class="menu-col-title">Karahi, Biryani &amp; Daal</div>
+          <div class="menu-col-count" id="rightCount"></div>
         </div>
         <ul class="menu-list" id="rightMenu"></ul>
       </div>
 
     </div>
 
-    <p style="text-align:center;margin-top:1.5rem;font-size:0.78rem;color:var(--muted);">
-      ✅ Tap any item to order via WhatsApp instantly &nbsp;·&nbsp; All prices in SAR
-    </p>
+    <div class="menu-foot-note reveal">
+      <span class="menu-foot-tip">
+        <svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+        Hold any item → instant WhatsApp order
+      </span>
+      <span class="pipe">|</span>
+      <span>All prices in SAR (Saudi Riyals)</span>
+    </div>
   </div>
 </section>
 
@@ -671,9 +1081,7 @@ footer {
         <div class="order-num">0580210732</div>
         <div class="order-desc">Send us your order on WhatsApp. Quick, easy, and confirmed in minutes.</div>
         <a href="https://wa.me/966580210732" target="_blank" class="order-btn btn-wa">
-          <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
-            <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/>
-          </svg>
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
           Chat on WhatsApp
         </a>
       </div>
@@ -683,11 +1091,51 @@ footer {
         <div class="order-num">0580210732</div>
         <div class="order-desc">Call us directly for reservations, bulk orders, or any inquiries.</div>
         <a href="tel:0580210732" class="order-btn btn-call">
-          <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor">
-            <path d="M6.62 10.79c1.44 2.83 3.76 5.14 6.59 6.59l2.2-2.2c.27-.27.67-.36 1.02-.24 1.12.37 2.33.57 3.57.57.55 0 1 .45 1 1V20c0 .55-.45 1-1 1-9.39 0-17-7.61-17-17 0-.55.45-1 1-1h3.5c.55 0 1 .45 1 1 0 1.25.2 2.45.57 3.57.11.35.03.74-.25 1.02l-2.2 2.2z"/>
-          </svg>
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor"><path d="M6.62 10.79c1.44 2.83 3.76 5.14 6.59 6.59l2.2-2.2c.27-.27.67-.36 1.02-.24 1.12.37 2.33.57 3.57.57.55 0 1 .45 1 1V20c0 .55-.45 1-1 1-9.39 0-17-7.61-17-17 0-.55.45-1 1-1h3.5c.55 0 1 .45 1 1 0 1.25.2 2.45.57 3.57.11.35.03.74-.25 1.02l-2.2 2.2z"/></svg>
           Call Now
         </a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════ MAP SECTION ══════════════════ -->
+<section class="section" id="location" style="padding-top:0; padding-bottom:0;">
+  <div class="section-inner" style="padding-bottom:4rem;">
+    <div class="section-head reveal" style="margin-bottom:2rem;">
+      <div class="section-label">📍 Find Us</div>
+      <h2 class="section-title">Our <span class="hl">Location</span></h2>
+      <div class="section-divider"></div>
+    </div>
+    <div class="map-wrap reveal">
+      <div class="map-info-bar">
+        <div class="map-info-item">
+          <span class="map-info-icon">📍</span>
+          <div>
+            <div class="map-info-label">Address</div>
+            <div class="map-info-val">C2P9+5G2, Dammam, Saudi Arabia</div>
+          </div>
+        </div>
+        <div class="map-info-item">
+          <span class="map-info-icon">🕐</span>
+          <div>
+            <div class="map-info-label">Hours</div>
+            <div class="map-info-val">Daily · 7:00 AM – 11:00 PM</div>
+          </div>
+        </div>
+        <a href="https://maps.google.com/?q=C2P9+5G2+Dammam+Saudi+Arabia" target="_blank" class="map-directions-btn">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M21.71 11.29l-9-9a1 1 0 00-1.42 0l-9 9a1 1 0 000 1.42l9 9a1 1 0 001.42 0l9-9a1 1 0 000-1.42zM14 14.5V12h-4v3H8v-4a1 1 0 011-1h5V7.5l3.5 3.5-3.5 3.5z"/></svg>
+          Get Directions
+        </a>
+      </div>
+      <div class="map-frame">
+        <iframe
+          src="https://www.google.com/maps/embed/v1/place?key=AIzaSyD-9tSrke72PouQMnMX-a7eZSW0jkFMBWY&q=C2P9%2B5G2+Dammam+Saudi+Arabia&zoom=17"
+          width="100%" height="420" style="border:0;display:block;"
+          allowfullscreen loading="lazy"
+          referrerpolicy="no-referrer-when-downgrade"
+          title="Hijaz Stars Restaurant Location">
+        </iframe>
       </div>
     </div>
   </div>
@@ -701,15 +1149,14 @@ footer {
       <div class="footer-tagline">Authentic Pakistani Cuisine · Dammam, KSA</div>
       <div class="footer-location">
         <span class="footer-location-icon">📍</span>
-        <span>Dhamas, Haji Noor Plaza,<br>Opposite Abu Bakar Siddique Street, Dammam</span>
+        <span>C2P9+5G2, Dammam, Saudi Arabia<br>
+        <span style="color:var(--muted);font-size:0.75rem;">Opposite Abu Bakar Siddique Street</span></span>
       </div>
     </div>
     <div class="footer-right">
       <div class="footer-phone-label">Call or WhatsApp</div>
       <a href="tel:0580210732" class="footer-phone">
-        <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
-          <path d="M6.62 10.79c1.44 2.83 3.76 5.14 6.59 6.59l2.2-2.2c.27-.27.67-.36 1.02-.24 1.12.37 2.33.57 3.57.57.55 0 1 .45 1 1V20c0 .55-.45 1-1 1-9.39 0-17-7.61-17-17 0-.55.45-1 1-1h3.5c.55 0 1 .45 1 1 0 1.25.2 2.45.57 3.57.11.35.03.74-.25 1.02l-2.2 2.2z"/>
-        </svg>
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M6.62 10.79c1.44 2.83 3.76 5.14 6.59 6.59l2.2-2.2c.27-.27.67-.36 1.02-.24 1.12.37 2.33.57 3.57.57.55 0 1 .45 1 1V20c0 .55-.45 1-1 1-9.39 0-17-7.61-17-17 0-.55.45-1 1-1h3.5c.55 0 1 .45 1 1 0 1.25.2 2.45.57 3.57.11.35.03.74-.25 1.02l-2.2 2.2z"/></svg>
         0580210732
       </a>
     </div>
@@ -752,7 +1199,7 @@ const leftItems = [
   { name: 'Jalebi',           price: 16 },
   { name: 'Sweets (1kg)',     price: 25 },
   { name: 'Samosa',           price:  1 },
-  { name: 'Pakory',           price: 20 },
+  { name: 'Pakora',           price: 20 },
 ];
 
 const rightItems = [
@@ -764,32 +1211,123 @@ const rightItems = [
   { name: 'Vegetable Pulao',  price: 10 },
   { name: 'Mutton',           price: 12 },
   { name: 'Chicken',          price: 10 },
-  { name: 'White Daal Mach',  price: 10 },
-  { name: 'Daal Mach',        price:  8 },
+  { name: 'White Daal Maash', price: 10 },
+  { name: 'Daal Maash',       price:  8 },
   { name: 'Daal Chana',       price:  8 },
   { name: 'Black Chana',      price:  8 },
   { name: 'White Chana',      price:  8 },
   { name: 'Bhindi',           price: 12 },
-  { name: 'Karely',           price: 10 },
+  { name: 'Karela',           price: 10 },
   { name: 'Vegetables',       price:  8 },
   { name: 'Chicken Palak',    price: 12 },
-  { name: 'Kadhi Pakoda',     price: 10 },
+  { name: 'Kadhi Pakora',     price: 10 },
 ];
 
-function buildMenuRow(item) {
-  const msg = encodeURIComponent(`Hello! I'd like to order: ${item.name}\nمرحبا، أريد طلب: ${item.name}`);
-  const wa  = `https://wa.me/966580210732?text=${msg}`;
+// ── WHATSAPP ORDER ──
+function orderOnWhatsApp(name, price) {
+  const msg = encodeURIComponent(
+    `🍽️ Hello Hijaz Stars!\n\nI would like to order:\n\n• ${name} — SAR ${price}\n\nPlease confirm my order. Thank you! 🙏`
+  );
+  window.open(`https://wa.me/966580210732?text=${msg}`, '_blank');
+}
+
+// ── BUILD MENU ROW (with hold-to-order + click-to-order) ──
+function buildMenuRow(item, index) {
+  const safeName  = item.name.replace(/'/g, "\\'");
+  const safePrice = item.price;
   return `
-    <li class="menu-row" onclick="window.open('${wa}','_blank')" role="button" aria-label="Order ${item.name}">
+    <li class="menu-row"
+      data-name="${item.name}" data-price="${item.price}"
+      role="button" aria-label="Order ${item.name} – SAR ${item.price}">
+      <div class="menu-row-hold"></div>
+      <span class="menu-row-num">${String(index + 1).padStart(2,'0')}</span>
       <span class="menu-row-name">${item.name}</span>
       <span class="menu-row-dots"></span>
       <span class="menu-row-price">${item.price}</span>
-      <span class="menu-row-order">Order ➜</span>
+      <span class="menu-row-wa">
+        <svg width="10" height="10" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+        Order
+      </span>
     </li>`;
 }
 
+// Inject rows
 document.getElementById('leftMenu').innerHTML  = leftItems.map(buildMenuRow).join('');
 document.getElementById('rightMenu').innerHTML = rightItems.map(buildMenuRow).join('');
+
+// Item count badges
+document.getElementById('leftCount').textContent  = leftItems.length + ' items';
+document.getElementById('rightCount').textContent = rightItems.length + ' items';
+
+// ── HOLD-TO-ORDER TOAST ──
+const toast = document.createElement('div');
+toast.className = 'hold-toast';
+toast.innerHTML = '<svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg> <span id="toastText">Opening WhatsApp…</span>';
+document.body.appendChild(toast);
+
+function showToast(msg, dur = 2200) {
+  document.getElementById('toastText').textContent = msg;
+  toast.classList.add('show');
+  clearTimeout(showToast._t);
+  showToast._t = setTimeout(() => toast.classList.remove('show'), dur);
+}
+
+// ── HOLD-TO-ORDER LOGIC ──
+// Works on both touch (mobile) and mouse (desktop)
+// Hold for 650ms → fires WhatsApp order
+// Click/tap also fires (for quick desktop users)
+
+const HOLD_MS = 650;
+let holdTimer = null;
+let holdActive = false;
+
+function startHold(el) {
+  const name  = el.dataset.name;
+  const price = el.dataset.price;
+  if (!name) return;
+
+  holdActive = false;
+  el.classList.add('pressing');
+  showToast(`Hold to order ${name}…`, HOLD_MS + 400);
+
+  holdTimer = setTimeout(() => {
+    holdActive = true;
+    el.classList.remove('pressing');
+    orderOnWhatsApp(name, price);
+    showToast(`✅ Opening WhatsApp for ${name}!`);
+  }, HOLD_MS);
+}
+
+function cancelHold(el) {
+  clearTimeout(holdTimer);
+  el.classList.remove('pressing');
+}
+
+function finishHold(el) {
+  clearTimeout(holdTimer);
+  el.classList.remove('pressing');
+  // If it was a quick click (not held to completion), still order
+  if (!holdActive) {
+    const name  = el.dataset.name;
+    const price = el.dataset.price;
+    if (name) orderOnWhatsApp(name, price);
+  }
+  holdActive = false;
+}
+
+// Attach events to all rows
+document.querySelectorAll('.menu-row').forEach(row => {
+  // ── Touch (mobile) ──
+  row.addEventListener('touchstart',  (e) => { startHold(row); }, { passive: true });
+  row.addEventListener('touchend',    (e) => { finishHold(row); }, { passive: true });
+  row.addEventListener('touchcancel', (e) => { cancelHold(row); }, { passive: true });
+  row.addEventListener('touchmove',   (e) => { cancelHold(row); }, { passive: true });
+
+  // ── Mouse (desktop) ──
+  row.addEventListener('mousedown',   (e) => { startHold(row); });
+  row.addEventListener('mouseup',     (e) => { finishHold(row); });
+  row.addEventListener('mouseleave',  (e) => { cancelHold(row); });
+});
 
 // ── SCROLL REVEAL ──
 const revealEls = document.querySelectorAll('.reveal');
@@ -800,14 +1338,12 @@ const io = new IntersectionObserver((entries) => {
 }, { threshold: 0.08 });
 revealEls.forEach(el => io.observe(el));
 
-// ── NAVBAR SHADOW ON SCROLL ──
-const header = document.getElementById('top');
+// ── NAVBAR SHADOW ──
+const headerEl = document.getElementById('top');
 window.addEventListener('scroll', () => {
-  header.style.boxShadow = window.scrollY > 10
-    ? '0 2px 20px rgba(0,0,0,0.5)'
-    : 'none';
+  headerEl.style.boxShadow = window.scrollY > 10
+    ? '0 2px 20px rgba(0,0,0,0.5)' : 'none';
 }, { passive: true });
 </script>
 </body>
 </html>
-
